@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block header %}
+<h1 id="title">{% block title %} {{ evento.nombre }} {% endblock %}</h1>
+{% endblock %}
+{% block content %}
+<h2>{{ evento.fecha }}</h2>
+<p>{{ evento.descripcion }}</p>
+<img src="{{ url_for('static', filename=evento.img) }}">
+{% endblock %}

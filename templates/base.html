@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}{% endblock %} - EventManager</title>
+<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <a href="/"><h3>EventManager</h3></a>
+  {% block header %}{% endblock %}
+</header>
+{% for message in get_flashed_messages() %}
+  <div class="flash">{{ message }}</div>
+{% endfor %}
+{% block content %}{% endblock %}
+</body>
+</html>

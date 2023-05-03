@@ -1,0 +1,16 @@
+body {
+    width: 100%;
+    max-width: 50em;
+}
+
+.item {
+    display: inline-block;
+    max-width: 35%;
+    word-wrap: break-word;
+    margin: 1em;
+}
+
+img { 
+    width: 100%; 
+    max-width: 30em;
+}
