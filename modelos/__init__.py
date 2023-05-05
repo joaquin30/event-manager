@@ -86,7 +86,21 @@ class Tabla:
         """
         if self.existe(id):
             db.session.delete(self.recuperarUno(id))
-            db.commit()
+            db.session.commit()
+
+    def modificar(self, id: int, nuevo: Modelo):
+        """Modifica una fila con el identificador respectivo, si no
+        existe tal fila, no hace nada.
+
+        **Argumentos:**
+
+        - `id`: el identificador de la fila.
+        - `nuevo`: los nuevos datos de la fila
+        """
+        if self.existe(id):
+            self.eliminar(id)
+            nuevo.id = id
+            self.insertar(nuevo)
 
 from .evento import Evento
 from .usuario import Usuario

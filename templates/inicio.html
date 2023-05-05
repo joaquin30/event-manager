@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% block header %}
-  <h1 id="title">{% block title %}Inicio{% endblock %}</h1>
-{% endblock %}
+{% block name %} Inicio {% endblock %}
 {% block content %}
+<h1>Últimos eventos</h1>
 <center>
 {% for evento in eventos %}
 <div class="item">
     <a href="/evento/{{ evento.id }}"><h2>{{ evento.nombre }}</h2></a>
     <h3>{{ evento.fecha }}</h3>
-    <img src="{{ url_for('static', filename=evento.img) }}">
+    <img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
+        alt="{{ evento.nombre }}">
 </div>
 {% endfor %}
 </center>

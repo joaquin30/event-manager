@@ -3,7 +3,7 @@ from flask.views import View
 class Vista(View):
     """Clase abstracta de la interfaz, se instancia para crear páginas.
     """
-
+    methods = ['GET', 'POST']
     init_every_request = False
     rol_minimo: int
     """Número entre 0 y 3 que indica el nivel de acceso de la página.
@@ -37,5 +37,9 @@ class Vista(View):
         """
         pass
 
-from .inicio import PagInicio
-from .evento import PagEvento
+from .inicio import *
+from .public_evento import *
+from .eventos import *
+
+pags = [PagInicio, PagPublicEvento, PagEventos, PagCrearEvento,
+        PagModificarEvento]
