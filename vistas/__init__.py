@@ -1,4 +1,5 @@
 from flask.views import View
+from wtforms.validators import ValidationError
 
 class Vista(View):
     """Clase abstracta de la interfaz, se instancia para crear páginas.

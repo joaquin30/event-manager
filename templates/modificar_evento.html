@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
-{% block title %} Crear evento {% endblock %}
+{% block title %} Modificar evento {% endblock %}
 {% block content %}
-<h1>Modificar evento</h1>
+<h1>Modificar evento "{{evento.nombre}}"</h1>
+<p><a href="/eventos"><button>Deshacer cambios</button></a></p>
+{% from "form_render.html" import render_field %}
 <form action="{{ url }}" method="post" enctype="multipart/form-data">
-  <label for="nombre">Nombre:</label><br>
-  <input type="text" id="nombre" name="nombre" value="{{ evento.nombre }}" required><br>
-  <label for="fecha">Fecha:</label><br>
-  <input type="date" id="fecha" name="fecha" value="{{ evento.fecha }}" required><br>
-  <label for="desc">Descripción:</label><br>
-  <textarea id="desc" name="desc" required>{{ evento.descripcion }}</textarea><br>
-  <label for="img">Imagen de presentación (dejar vacio si no se quiere cambiar la imagen):</label><br>
-  <input type="file" id="img" name="img"><br><br>
-  <input type="submit" name="submit" value="Crear evento">
+  {{ form.csrf_token }}
+  {{ render_field(form.nombre) }}
+  {{ render_field(form.fecha) }}
+  {{ render_field(form.desc) }}
+  {{ render_field(form.img) }}
+  <br>
+  <input type="submit" value="Modificar evento">
 </form>
+<p>Imagen actual: (si no se desea modificar no subir una nueva imagen)</p>
+<center>
+<img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
+  alt="{{ evento.nombre }}">
+</center>
 {% endblock %}

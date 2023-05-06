@@ -2,9 +2,9 @@
 {% block title %} Eventos {% endblock %}
 {% block content %}
 <h1>Administrar eventos</h1>
-<a href="/eventos/crear">
+<p><a href="/eventos/crear">
       <button>Crear Evento</button>
-  </a>
+  </a></p>
 <table>
 {% for evento in eventos %}
 <tr>
@@ -14,7 +14,7 @@
       <button>Modificar</button>
   </a></td>
   <td>
-<form action="/eventos" method="post">
+<form style="margin-bottom: 0;"action="/eventos" method="post">
   <button name="eliminar" value="{{evento.id}}">Eliminar</button>
 </form>
   </td>
