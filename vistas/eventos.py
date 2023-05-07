@@ -43,7 +43,7 @@ class FormModificarEvento(FlaskForm):
     nombre = StringField('Nombre', [Length(min=1, max=100), DataRequired()])
     fecha = DateField('Fecha', [DataRequired()])
     desc = TextAreaField('Descripción', [Length(min=1, max=1000), DataRequired()])
-    img = FileField('Imagen del evento', [Optional(),
+    img = FileField('Nueva imagen del evento', [Optional(),
         FileAllowed(['jpg', 'png', 'webp', 'bmp', 'gif', 'jpeg']), FileSizeLimit(5), ])
 
 class PagCrearEvento(Vista):

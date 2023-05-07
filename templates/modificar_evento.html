@@ -2,7 +2,9 @@
 {% block title %} Modificar evento {% endblock %}
 {% block content %}
 <h1>Modificar evento "{{evento.nombre}}"</h1>
-<p><a href="/eventos"><button>Deshacer cambios</button></a></p>
+<p><a class="button" href="/eventos">Deshacer cambios</a></p>
+<div class="row">
+<div class="col-7">
 {% from "form_render.html" import render_field %}
 <form action="{{ url }}" method="post" enctype="multipart/form-data">
   {{ form.csrf_token }}
@@ -10,12 +12,13 @@
   {{ render_field(form.fecha) }}
   {{ render_field(form.desc) }}
   {{ render_field(form.img) }}
-  <br>
-  <input type="submit" value="Modificar evento">
+  <input type="submit" class="button error" value="Modificar evento">
 </form>
-<p>Imagen actual: (si no se desea modificar no subir una nueva imagen)</p>
-<center>
-<img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
-  alt="{{ evento.nombre }}">
-</center>
+</div>
+<div class="col-5">
+  <p><b>Imagen actual</b><br><em>Si no se desea modificar no subir una nueva imagen</em></p>
+  <p><img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
+          alt="{{ evento.nombre }}"></p>
+</div>
+</div>
 {% endblock %}

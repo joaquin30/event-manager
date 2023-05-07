@@ -2,8 +2,16 @@
 {% block title %} {{ evento.nombre }} {% endblock %}
 {% block content %}
 <h1>{{ evento.nombre }}</h1>
-<h3>{{ evento.fecha }}</h3>
-<p>{{ evento.descripcion }}</p>
-<img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
-  alt="{{ evento.nombre }}">
+<div class=row>
+  <div class="col-5 is-center">
+    <img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
+         alt="{{ evento.nombre }}">
+  </div>
+  <div class=col>
+    <h3>Fecha</h3>
+    <p>{{ evento.fecha }}</p>
+    <h3>Descripción</h3>
+    <p>{{ evento.descripcion }}</p>
+  </div>
+</div>
 {% endblock %}

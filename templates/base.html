@@ -4,21 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% endblock %} - EventManager</title>
-<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/chota@latest">
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
 </head>
 <body>
 <header>
-  <h2>EventManager</h2>
-  <nav>
-      <a href="/">Inicio</a> /
-      <a href="/eventos">Administrar eventos</a>
+<div class="container">
+  <nav class="nav">
+    <div class="nav-left">
+      <b class="brand">EventManager</b>
+      <div class="tabs">
+        <a href="/">Inicio</a>
+        <a href="/eventos">Eventos</a>
+      </div>
+    </div>
+    <!--
+    <div class="nav-right">
+      <a class="button outline" href="#">Iniciar sesión</a>
+    </div>
+    -->
   </nav>
 </header>
+<div class="container">
 {% for message in get_flashed_messages() %}
   <div class="flash">{{ message }}</div>
 {% endfor %}
 {% block content %}{% endblock %}
+</div>
 </body>
 </html>

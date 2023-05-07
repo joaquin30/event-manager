@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 {% block title %} Inicio {% endblock %}
 {% block content %}
-<h1>Últimos eventos</h1>
-<center>
+<h1>Últimas publicaciones</h1>
+<hr>
 {% for evento in eventos %}
-<div class="item">
-    <a href="/evento/{{ evento.id }}"><h2>{{ evento.nombre }}</h2></a>
-    <h3>{{ evento.fecha }}</h3>
-    <img src="{{ url_for('static', filename=evento.id ~ '.png') }}"
+<div class="row" style="height: 10em; margin-top: 1em; margin-bottom: 1em">
+<div class="col-4 is-center">
+    <img style="height: 10em"
+        src="{{ url_for('static', filename=evento.id ~ '.png') }}"
         alt="{{ evento.nombre }}">
 </div>
+<div class="col">
+    <h2>{{ evento.nombre }}</h2>
+    <p><em>{{ evento.fecha }}<em></p>
+    <a href="/evento/{{ evento.id }}" class="button outline">Ver más</a>
+</div>
+</div>
+<hr>
 {% endfor %}
-</center>
 {% endblock %}

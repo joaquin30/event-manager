@@ -2,23 +2,30 @@
 {% block title %} Eventos {% endblock %}
 {% block content %}
 <h1>Administrar eventos</h1>
-<p><a href="/eventos/crear">
-      <button>Crear Evento</button>
-  </a></p>
-<table>
+<p><a class="button primary" href="/eventos/crear">Crear Evento</a></p>
+<hr>
 {% for evento in eventos %}
-<tr>
-  <td>{{ evento.nombre }}</td>
-  <td>{{ evento.fecha }}</td>
-  <td><a href="/eventos/modificar/{{evento.id}}">
-      <button>Modificar</button>
-  </a></td>
-  <td>
-<form style="margin-bottom: 0;"action="/eventos" method="post">
-  <button name="eliminar" value="{{evento.id}}">Eliminar</button>
-</form>
-  </td>
-</tr>
+<div class=row>
+  <div class="col-4 is-center">
+    <b>{{ evento.nombre }}</b>
+  </div>
+  <div class="col-2 is-center">
+    <em>{{ evento.fecha }}</em>
+  </div>
+  <div class="col-2 is-center">
+    <a class="button" href="/eventos/preinscritos/{{evento.id}}">Ver preinscritos</a>
+  </div>
+  <div class="col-2 is-center">
+    <a class="button" href="/eventos/modificar/{{evento.id}}">Modificar</a>
+  </div>
+  <div class="col-2 is-center">
+    <form action="/eventos" method="post">
+    <button class="button error" name="eliminar" value="{{evento.id}}">Eliminar</button>
+    </form>
+  </div>
+</div>
+<hr>
 {% endfor %}
+</tbody>
 </table>
 {% endblock %}
