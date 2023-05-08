@@ -37,7 +37,7 @@ class Tabla:
         
         **Retorno:** Una lista con las filas que cumplan la condición.
         """
-        return db.session.scalars(db.select(Evento).where(condicion)).all()
+        return db.session.scalars(db.select(self.modelo).where(condicion)).all()
 
     def recuperarUno(self, id: int) -> Modelo:
         """Recupera una sola fila que corresponda al identificador.
@@ -104,6 +104,7 @@ class Tabla:
 
 from .evento import Evento
 from .usuario import Usuario
+from .preinscrito import Preinscrito
 
 tabla_usuarios = Tabla(Usuario)
 tabla_eventos = Tabla(Evento)

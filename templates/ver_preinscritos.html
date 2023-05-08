@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Preinscritos {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Preinscritos {{ evento.nombre }}</h1>
+<a class="button outline" href="/eventos">Volver</a>
+<table class="striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Teléfono</th>
+      <th>Correo eletrónico</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in preinscritos %}
+    <tr>
+      <td>{{ p.nombre }}</td>
+      <td>{{ p.edad }}</td>
+      <td>{{ p.telefono }}</td>
+      <td>{{ p.email }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,12 +1,13 @@
 from vistas import Vista#, FileSizeLimit
 from controladores import gestor_eventos 
-from flask import render_template, redirect, request, flash 
+from flask import render_template, redirect, request, flash, abort
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateTimeField, TextAreaField, DateField
 from wtforms.validators import Length, DataRequired, Optional
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms.validators import ValidationError
 from datetime import date
+from modelos import Tabla, Preinscrito
 
 def FileSizeLimit(max_size_in_mb):
     max_bytes = max_size_in_mb*1024*1024
@@ -91,4 +92,19 @@ class PagModificarEvento(Vista):
         form.desc.data = evento.descripcion
         return render_template(self.template, url=f'/eventos/modificar/{id}', form=form,
                 evento=evento)
+
+
+class PagVerPreinscritos(Vista):
+    """Página donde se modifica un evento. Tiene un formulario para
+    cada elemento de un evento."""
+    rol_minimo = 3
+    url = '/eventos/preinscritos/<int:id>'
+    template = 'ver_preinscritos.html'
+
+    def mostrar(self, id: int):
+        tabla = Tabla(Preinscrito)
+        print(tabla.recuperarCuando(Preinscrito.evento_id == id))
+        return render_template(self.template,
+                evento=gestor_eventos.obtenerEvento(id),
+                preinscritos=tabla.recuperarCuando(Preinscrito.evento_id == id))
 

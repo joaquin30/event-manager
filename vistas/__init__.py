@@ -43,4 +43,4 @@ from .public_evento import *
 from .eventos import *
 
 pags = [PagInicio, PagPublicEvento, PagEventos, PagCrearEvento,
-        PagModificarEvento]
+        PagModificarEvento, PagVerPreinscritos]

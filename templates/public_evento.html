@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from "form_render.html" import render_field %}
 {% block title %} {{ evento.nombre }} {% endblock %}
 {% block content %}
 <h1>{{ evento.nombre }}</h1>
@@ -14,4 +15,21 @@
     <p>{{ evento.descripcion }}</p>
   </div>
 </div>
+<div style="margin-top:2em; padding-bottom:1.5em" class=card>
+<h2>Preinscribirse</h2>
+<form action="{{ url }}" method="post" enctype="multipart/form-data">
+  <div class=row>
+      <div class=col>
+      {{ form.csrf_token }}
+      {{ render_field(form.nombre) }}
+      {{ render_field(form.edad) }}
+      </div>
+      <div class=col>
+      {{ render_field(form.telefono) }}
+      {{ render_field(form.email) }}
+      </div>
+  </div>
+  <input type="submit" value="Preinscribirse">
+</div>
+</form>
 {% endblock %}

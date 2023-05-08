@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% endblock %} - EventManager</title>
-<link rel="stylesheet" href="https://unpkg.com/chota@latest">
+<link rel="stylesheet" href="{{url_for('static',filename='normalize.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='chota.css')}}">
 <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
 </head>
 <body>
