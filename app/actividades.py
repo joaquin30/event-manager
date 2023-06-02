@@ -6,19 +6,19 @@ from forms import FormCrearActividad, FormModificarActividad, FormCrearPaquete
 
 pag_actividades = Blueprint('actividades', __name__)
 
-class Actividades(Controlador):
-    template = 'actividades.html'
+class Eventos(Controlador):
+    template = 'actividades/eventos.html'
     url = '/actividades'
 
     def get(self):
         return render_template(self.template,
                 eventos=obtenerTodo(Evento, reverse=True))
 
-route(pag_actividades, Actividades)
+route(pag_actividades, Eventos)
 
 
-class ActividadesEvento(Controlador):
-    template = 'actividades_evento.html'
+class Actividades(Controlador):
+    template = 'actividades/actividades.html'
     url = '/actividades/<int:id_evento>'
 
     def get(self, id_evento):
@@ -49,11 +49,11 @@ class ActividadesEvento(Controlador):
         return redirect(f'/actividades/{id_evento}')
     
 
-route(pag_actividades, ActividadesEvento)
+route(pag_actividades, Actividades)
 
 
-class CrearActividadesEvento(Controlador):
-    template = 'actividades_evento_crear.html'
+class CrearActividad(Controlador):
+    template = 'actividades/crear.html'
     url = '/actividades/<int:id_evento>/crear'
 
     def get(self, id_evento):
@@ -75,7 +75,7 @@ class CrearActividadesEvento(Controlador):
         form = FormCrearActividad()
         if form.validate():
             if form.fecha_inicio.data > form.fecha_fin.data:
-                flash('La fecha de inicio es mayor a la fecha de fin')
+                flash('La fecha de inicio es mayor a la fecha de fin.', 'error')
                 return redirect(f'/actividades/{id_evento}/crear')
                 
             actividad = Actividad(
@@ -95,12 +95,12 @@ class CrearActividadesEvento(Controlador):
             flash(f'Actividad "{ actividad.nombre }" creada.')
             return redirect(f'/actividades/{id_evento}')
         else:
-            flash('Errores en el formulario.')
+            flash('Errores en el formulario.', 'error')
             return redirect(f'/actividades/{id_evento}/crear')
 
-route(pag_actividades, CrearActividadesEvento)
+route(pag_actividades, CrearActividad)
 
-class ModificarActividadesEvento(Controlador):
+class ModificarActividad(Controlador):
     url = '/actividades/<int:id_evento>/modificar/<int:id_actividad>'
     template = 'actividades/modificar.html'
 
@@ -130,7 +130,7 @@ class ModificarActividadesEvento(Controlador):
         form = FormCrearActividad()
         if form.validate():
             if form.fecha_inicio.data > form.fecha_fin.data:
-                flash('La fecha de inicio es mayor a la fecha de fin')
+                flash('La fecha de inicio es mayor a la fecha de fin.', 'error')
                 return redirect(f'/actividades/{id_evento}/crear')
 
             actividad.nombre = form.nombre.data
@@ -147,7 +147,7 @@ class ModificarActividadesEvento(Controlador):
             flash(f'Actividad "{ actividad.nombre }" modificada.')
             return redirect(f'/actividades/{id_evento}')
         else:
-            flash('Errores en el formulario.')
+            flash('Errores en el formulario.', 'error')
             return redirect(f'/actividades/{id_evento}/modificar/{id_actividad}')
 
-route(pag_actividades, ModificarActividadesEvento)
+route(pag_actividades, ModificarActividad)

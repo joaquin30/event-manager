@@ -2,25 +2,26 @@
 {% block title %} Eventos {% endblock %}
 {% block content %}
 <h1>Paquetes por evento</h1>
-<hr>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Nombre de evento</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de fin</th>
+        <th></th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
 {% for evento in eventos %}
-<div class=row>
-  <div class="col">
-    <p>{{ evento.nombre }}</p>
-  </div>
-  <div class="col is-center">
-    <p>{{ render_date(evento.fecha_inicio) }}</p>
-  </div>
-  <div class="col is-center">
-    <p>{{ render_date(evento.fecha_fin) }}</p>
-  </div>
-  <div class="col is-center">
-    <a class="button" href="/preinscritos/{{ evento.get_pk() }}">Ver preinscritos</a>
-  </div>
-  <div class="col is-center">
-    <a class="button" href="/inscritos/{{ evento.get_pk() }}">Ver inscritos</a>
-  </div>
-</div>
-<hr>
+<tr>
+    <td>{{ evento.nombre }}</td>
+    <td>{{ render_date(evento.fecha_inicio) }}</td>
+    <td>{{ render_date(evento.fecha_fin) }}</td>
+    <td><a class="button" href="/preinscritos/{{ evento.get_pk() }}">Ver preinscritos</a></td>
+    <td><a class="button" href="/inscritos/{{ evento.get_pk() }}">Ver inscritos</a></td>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% endblock %}

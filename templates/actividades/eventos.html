@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %} Paquetes {% endblock %}
+{% block title %} Actividades {% endblock %}
 {% block content %}
-<h1>Paquetes por evento</h1>
+<h1>Actividades por evento</h1>
 <table class="striped">
 <thead>
-<tr>
-    <th>Nombre de evento</th>
-    <th>Fecha de inicio</th>
-    <th>Fecha de fin</th>
-    <th></th>
-</tr>
+    <tr>
+        <th>Nombre de evento</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de fin</th>
+        <th></th>
+    </tr>
 </thead>
 <tbody>
 {% for evento in eventos %}
@@ -17,7 +17,7 @@
     <td>{{ evento.nombre }}</td>
     <td>{{ render_date(evento.fecha_inicio) }}</td>
     <td>{{ render_date(evento.fecha_fin) }}</td>
-    <td><a class="button" href="/paquetes/{{ evento.get_pk() }}">Ver Paquetes</a></td>
+    <td><a class="button" href="/actividades/{{ evento.get_pk() }}">Ver Actividades</a></td>
 </tr>
 {% endfor %}
 </tbody>

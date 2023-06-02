@@ -56,13 +56,13 @@ class MultiCheckboxAtLeastOne():
 
 class FormCrearPaquete(FlaskForm):
     nombre = StringField('Nombre', [DataRequired(), Length(min=1, max=100)])
-    precio = DecimalField('Precio', [DataRequired(), NumberRange(min=0)], step=0.10)
+    precio = DecimalField('Precio', [DataRequired(), NumberRange(min=0)])
     actividades = MultiCheckboxField('Actividades', [MultiCheckboxAtLeastOne()], coerce=int)
     submit = SubmitField('Crear paquete')
 
 class FormModificarPaquete(FlaskForm):
     nombre = StringField('Nombre', [DataRequired(), Length(min=1, max=100)])
-    precio = DecimalField('Precio', [DataRequired(), NumberRange(min=0)], step=0.10)
+    precio = DecimalField('Precio', [DataRequired(), NumberRange(min=0)])
     actividades = MultiCheckboxField('Actividades', [MultiCheckboxAtLeastOne()], coerce=int)
     submit = SubmitField('Modificar paquete')
 

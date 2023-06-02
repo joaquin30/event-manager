@@ -74,11 +74,11 @@ class CrearEgreso(Controlador):
         if form.validate():
             egreso = Egreso.get(pk_id=form.codigo.data)
             if egreso is not None:
-                flash('Código de comprobante ya registrado')
+                flash('Código de comprobante ya registrado.', 'error')
                 return redirect(f'/egresos/{id_evento}/crear')
                 
             if evento.fk_caja.saldo - form.monto.data < Decimal(0):
-                flash('Monto supera al saldo actual')
+                flash('Monto supera al saldo actual.', 'error')
                 return redirect(f'/egresos/{id_evento}/crear')
                 
             egreso = Egreso(
@@ -92,7 +92,7 @@ class CrearEgreso(Controlador):
             flash('Egreso creado exitosamente.')
             return redirect(f'/egresos/{id_evento}')
         else:
-            flash('Errores en el formulario')
+            flash('Errores en el formulario.', 'error')
             return redirect(f'/egresos/{id_evento}/crear')
 
 route(pag_caja, CrearEgreso)

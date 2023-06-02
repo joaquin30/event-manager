@@ -13,14 +13,7 @@ textarea {
     height: 10em;
 }
 
-summary:before {
-    font-family: "simple-line-icons";
-    /* codigo unicode de simple-line-icons, se pueden ver en su archivo .less en su pagina */
-    content: "\e606";
-    padding-left: 0.5em;
-    padding-right: 1em;
-}
-
-details[open] summary:before {
-    content: "\e604";
+.img-inline {
+    display: inline;
+    margin: auto 0;
 }

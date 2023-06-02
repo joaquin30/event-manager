@@ -44,7 +44,7 @@ class CrearEvento(Controlador):
             flash(f'Evento "{evento.nombre}" creado. Crea paquetes para que se habilite la preinscripción.')
             return redirect('/eventos')
         else:
-            flash('Errores en el formulario.')
+            flash('Errores en el formulario.', 'error')
             return redirect('/eventos/crear')
 
 route(pag_eventos, CrearEvento)
@@ -87,7 +87,7 @@ class ModificarEvento(Controlador):
             flash(f'Evento "{evento.nombre}" modificado.')
             return redirect('/eventos')
         else:
-            flash('Errores en el formulario')
+            flash('Errores en el formulario.', 'error')
             return redirect(f'/eventos/modificar/{id_evento}.')
 
 route(pag_eventos, ModificarEvento)

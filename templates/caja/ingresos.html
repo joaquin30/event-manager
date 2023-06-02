@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% block title %} Ingresos - {{ evento.nombre }} {% endblock %}
+{% block title %} Ingresos de evento {{ evento.nombre }} {% endblock %}
 {% block content %}
-<h1>Caja del evento {{ evento.nombre }}</h1>
-<h4>Saldo: <span style="padding-left:0.5em"></span>{{ render_money(evento.fk_caja.saldo) }}</h4>
+<h1>Caja de evento {{ evento.nombre }}</h1>
+<h4>Saldo:<span style="padding-left:0.5em"></span>{{ render_money(evento.fk_caja.saldo) }}</h4>
 <h2>Ingresos</h2>
 <table class="striped">
 <thead>
@@ -15,7 +15,7 @@
 </tr>
 </thead>
 <tbody>
-{% for comprobante in evento.fk_caja.st_comprobantes %}
+{% for comprobante in evento.fk_caja.st_comprobantes|sort(attribute='fecha_emision') %}
   <tr>
     <td>{{ comprobante.pk_id }}</td>
     <td>{{ comprobante.fk_inscrito.nombre }}</td>
@@ -26,5 +26,4 @@
 {% endfor %}
 </tbody>
 </table>
-
 {% endblock %}

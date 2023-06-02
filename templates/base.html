@@ -4,24 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% endblock %} - EventManager</title>
+<link rel="icon" type="image/png" href="{{url_for('static',filename='img/favicon.png')}}" />
 <link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='css/simple-line-icons.css')}}">
 <link rel="stylesheet" href="{{url_for('static',filename='css/chota.css')}}">
 <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+<script src="/static/scripts/decorate-navbar.js" defer></script>
 </head>
 <body>
 <header>
 <div class="container">
   <nav class="nav">
     <div class="nav-left">
-      <b class="brand">EventManager</b>
+        <img src="/static/img/favicon.png" class="img-inline">
+        <b class="brand">EventManager</b>
       <div class="tabs">
-          <a href="/">Inicio</a>
-          <a href="/eventos">Eventos</a>
-          <a href="/inscritos">Inscritos</a>
-          <a href="/actividades">Actividades</a>
-          <a href="/paquetes">Paquetes</a>
-          <a href="/caja">Caja</a>
+          <a class="navbar-link" href="/">Inicio</a>
+          <a class="navbar-link" href="/eventos">Eventos</a>
+          <a class="navbar-link" href="/inscritos">Inscritos</a>
+          <a class="navbar-link" href="/actividades">Actividades</a>
+          <a class="navbar-link" href="/paquetes">Paquetes</a>
+          <a class="navbar-link" href="/caja">Caja</a>
       </div>
     </div>
 <!--
@@ -32,12 +34,17 @@
   </nav>
 </div>
 </header>
-
+{% from 'utils.html' import render_form, render_field, render_date, render_money %}
 <div class="container">
-{% from "form_render.html" import render_form, render_date, render_money %}
-{% for message in get_flashed_messages() %}
-  <div class="flash">{{ message }}</div>
-{% endfor %}
+{% with messages = get_flashed_messages(with_categories=True) %}
+  {% for category, message in messages %}
+    {% if category == 'error' %}
+      <div class="card bd-error text-error">{{ message }}</div>
+    {% else %}
+      <div class="card bd-primary text-primary">{{ message }}</div>
+    {% endif %}
+  {% endfor %}
+{% endwith %}
 {% block content %}{% endblock %}
 </div>
 </body>

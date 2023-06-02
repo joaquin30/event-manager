@@ -8,7 +8,7 @@ pag_inicio = Blueprint('inicio', __name__)
 
 class Inicio(Controlador):
     url = '/'
-    template = 'inicio.html'
+    template = 'inicio/inicio.html'
     
     def get(self):
         eventos = orm.select(ev for ev in Evento if ev.fecha_inicio is not None) \
@@ -18,9 +18,9 @@ class Inicio(Controlador):
 route(pag_inicio, Inicio)
 
 
-class PubEvento(Controlador):
+class PublicacionEvento(Controlador):
     url = '/<int:id_evento>'
-    template = 'pub_evento.html'
+    template = 'inicio/evento.html'
 
     def get(self, id_evento):
         try:
@@ -61,14 +61,14 @@ class PubEvento(Controlador):
 
             for paquete in evento.st_paquetes:
                 if inscrito in paquete.st_inscritos or inscrito in paquete.st_preinscritos:
-                    flash('Ya te preinscribiste antes')
+                    flash('Ya te preinscribiste antes.', 'error')
                     return redirect(f'/{id_evento}')
             
             inscrito.st_preinscrito_paquetes.add(Paquete[form.paquete.data])
-            flash('Preinscripción exitosa')
+            flash('Preinscripción exitosa.')
         else:
-            flash('Errores en el formulario')
+            flash('Errores en el formulario.', 'error')
 
         return redirect(f'/{id_evento}')
 
-route(pag_inicio, PubEvento)
+route(pag_inicio, PublicacionEvento)

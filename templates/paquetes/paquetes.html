@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
-{% block title %} Eventos {% endblock %}
+{% block title %} Paquetes de evento {{ evento.nombre }} {% endblock %}
 {% block content %}
-<h1>Paquetes del evento "{{ evento.nombre }}"</h1>
-<a class="button primary" href="/paquetes/{{ evento.get_pk() }}/crear">Crear paquete</a>
-<hr>
+<h1>Paquetes de evento {{ evento.nombre }}</h1>
+<p><a class="button primary" href="/paquetes/{{ evento.get_pk() }}/crear">Crear paquete</a></p>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Nombre de paquete</th>
+        <th>Precio</th>
+        <th></th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
 {% for paquete in paquetes %}
-<div class=row>
-  <div class="col">
-    <p>{{ paquete.nombre }}</p>
-  </div>
-  <div class="col">
-    <p>{{ render_money(paquete.precio) }}</p>
-  </div>
-   <div class="col is-center">
-    <a class="button secondary" href="/paquetes/{{ evento.get_pk() }}/modificar/{{ paquete.get_pk() }}">
-      <span class="icon-pencil"></span> Modificar</a>
-  </div>
-  <div class="col is-center">
-    <form action="" method="post">
-        <button class="button error" name="eliminar" value="{{ paquete.get_pk() }}">
-            <span class="icon-trash"></span> Eliminar</button>
-    </form>
-  </div>
-</div>
-<hr>
+<tr>
+    <td>{{ paquete.nombre }}</td>
+    <td>{{ render_money(paquete.precio) }}</td>
+    <td><a class="button secondary" href="/paquetes/{{ evento.get_pk() }}/modificar/{{ paquete.get_pk() }}">Modificar</a></td>
+    <td><form action="" method="post">
+        <button class="button error" name="eliminar" value="{{ paquete.get_pk() }}">Eliminar</button>
+    </form></td>
+</tr>
 {% endfor %}
+</tbody>
+</table>
 {% endblock %}

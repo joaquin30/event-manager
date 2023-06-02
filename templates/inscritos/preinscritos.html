@@ -1,31 +1,32 @@
 {% extends 'base.html' %}
-{% block title %} Preinscritos - {{ evento.nombre }} {% endblock %}
+{% block title %} Inscritos de evento {{ evento.nombre }} {% endblock %}
 {% block content %}
-<h1>Preinscritos del evento "{{ evento.nombre }}"</h1>
+<h1>Inscritos de evento "{{ evento.nombre }}"</h1>
 {% for paquete in evento.st_paquetes|sort(attribute='nombre') %}
     <h2>Paquete {{ paquete.nombre }}</h2>
-    <hr>
+    <table class="striped">
+    <thead>
+        <tr>
+            <th>Nombre de preinscrito</th>
+            <th>Documento de identidad</th>
+            <th>Teléfono</th>
+            <th>Correo electrónico</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
     {% for inscrito in paquete.st_preinscritos|sort(attribute='nombre') %}
-        <div class=row>
-          <div class="col">
-            <p>{{ inscrito.nombre }}</p>
-          </div>
-          <div class="col">
-            <p>{{ inscrito.pk_id }}</p>
-          </div>
-          <div class="col">
-            <p>{{ inscrito.telefono }}</p>
-          </div>
-          <div class="col">
-            <p>{{ inscrito.email }}</p>
-          </div>
-          <div class="col is-center">
-            <form action="" method="post">
-                <button class="button primary" name="inscribir" value="{{ inscrito.get_pk() }} {{ paquete.get_pk() }}">Inscribir</button>
-            </form>
-          </div>
-        </div>
-        <hr>
+    <tr>
+        <td>{{ inscrito.nombre }}</td>
+        <td>{{ inscrito.pk_id }}</td>
+        <td>{{ inscrito.telefono }}</td>
+        <td>{{ inscrito.correo }}</td>
+        <td><form action="" method="post">
+            <button class="button primary" name="inscribir" value="{{ inscrito.get_pk() }} {{ paquete.get_pk() }}">Inscribir</button>
+        </form></td>
+    </tr>
     {% endfor %}
+    </tbody>
+    </table>
 {% endfor %}
 {% endblock %}

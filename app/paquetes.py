@@ -28,7 +28,7 @@ class Paquetes(Controlador):
             abort(404)
 
         if evento.st_actividades.count() == 0:
-            flash('Cree actividades en este evento para administrar los paquetes')
+            flash('Cree actividades en este evento para administrar los paquetes.', 'error')
             return redirect('/paquetes')
 
         paquetes = orm.select(pq for pq in Paquete).order_by(lambda pq: pq.precio)
@@ -86,7 +86,7 @@ class CrearPaquete(Controlador):
             flash(f'Paquete "{ paquete.nombre }" creado.')
             return redirect(f'/paquetes/{id_evento}')
         else:
-            flash('Errores en el formulario.')
+            flash('Errores en el formulario.', 'error')
             return redirect(f'/paquetes/{id_evento}/crear')
 
 route(pag_paquetes, CrearPaquete)
@@ -135,7 +135,7 @@ class ModificarPaquete(Controlador):
             flash(f'Paquete "{paquete.nombre}" modificado.')
             return redirect(f'/paquetes/{id_evento}')
         else:
-            flash('Errores en el formulario.')
+            flash('Errores en el formulario.', 'error')
             return redirect(f'/paquetes/{id_evento}/modificar/{id_paquete}')
 
 route(pag_paquetes, ModificarPaquete)

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %} Actividades de evento {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Actividades de evento {{ evento.nombre }}</h1>
+<p><a class="button primary" href="/actividades/{{ evento.get_pk() }}/crear">Crear actividad</a></p>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Nombre de actividad</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de fin</th>
+        <th></th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+{% for actividad in actividades %}
+<tr>
+    <td>{{ actividad.nombre }}</td>
+    <td>{{ render_date(actividad.fecha_inicio) }}</td>
+    <td>{{ render_date(actividad.fecha_fin) }}</td>
+    <td><a class="button secondary" href="/actividades/{{ evento.get_pk() }}/modificar/{{ actividad.get_pk() }}">Modificar</a></td>
+    <td><form action="" method="post">
+        <button class="button error" name="eliminar" value="{{ actividad.get_pk() }}">Eliminar</button>
+    </form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

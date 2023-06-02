@@ -49,7 +49,6 @@ class Preinscritos(Controlador):
             descripcion=f'Compra de paquete {paquete.nombre} del evento {evento.nombre}',
             fecha_emision=date.today(),
             monto=paquete.precio)
-        # ~ evento.fk_caja.st_comprobantes.add(comprobante)
         evento.fk_caja.saldo += comprobante.monto
         orm.commit()
         return redirect(f'/preinscritos/{id_evento}')
