@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Crear evento {% endblock %}
 {% block content %}
-<h1>Crear evento</h1>
-<p><a href="/eventos"><button>Deshacer cambios</button></a></p>
+<h1>Crear actividad</h1>
+<p><a href="/actividades/{{ evento.get_pk() }}"><button>Deshacer cambios</button></a></p>
 {{ render_form(form) }}
 {% endblock %}

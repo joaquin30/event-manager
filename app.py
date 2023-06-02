@@ -1,27 +1,22 @@
 from flask import Flask
-from functools import wraps
-from vistas import pags
-from modelos import db
+from pony.flask import Pony
 import os
 
-# crear App
-
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///event_manager.db'
+Pony(app)
 app.config['SECRET_KEY'] = os.urandom(20)
-db.init_app(app)
-
-with app.app_context():
-    db.create_all()
-
-# Configurar rutas
-
-def route(Pag):
-    view = Pag.as_view(Pag.__name__)
-    app.add_url_rule(Pag.url, view_func=view)
-
-for pag in pags:
-    route(pag)
+from app.inicio import pag_inicio
+app.register_blueprint(pag_inicio)
+from app.eventos import pag_eventos
+app.register_blueprint(pag_eventos)
+from app.actividades import pag_actividades
+app.register_blueprint(pag_actividades)
+from app.paquetes import pag_paquetes
+app.register_blueprint(pag_paquetes)
+from app.inscritos import pag_inscritos
+app.register_blueprint(pag_inscritos)
+from app.caja import pag_caja
+app.register_blueprint(pag_caja)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Preinscritos - {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Preinscritos del evento "{{ evento.nombre }}"</h1>
+{% for paquete in evento.st_paquetes|sort(attribute='nombre') %}
+    <h2>Paquete {{ paquete.nombre }}</h2>
+    <hr>
+    {% for inscrito in paquete.st_preinscritos|sort(attribute='nombre') %}
+        <div class=row>
+          <div class="col">
+            <p>{{ inscrito.nombre }}</p>
+          </div>
+          <div class="col">
+            <p>{{ inscrito.pk_id }}</p>
+          </div>
+          <div class="col">
+            <p>{{ inscrito.telefono }}</p>
+          </div>
+          <div class="col">
+            <p>{{ inscrito.email }}</p>
+          </div>
+          <div class="col is-center">
+            <form action="" method="post">
+                <button class="button primary" name="inscribir" value="{{ inscrito.get_pk() }} {{ paquete.get_pk() }}">Inscribir</button>
+            </form>
+          </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endfor %}
+{% endblock %}

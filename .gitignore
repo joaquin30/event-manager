@@ -5,3 +5,4 @@ docs/
 *.plantuml
 *.dot
 *.png
+*.sqlite

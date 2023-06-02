@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Ingresos - {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Caja del evento {{ evento.nombre }}</h1>
+<h4>Saldo: <span style="padding-left:0.5em"></span>{{ render_money(evento.fk_caja.saldo) }}</h4>
+<h2>Egresos</h2>
+<p><a href="/egresos/{{ evento.get_pk() }}/crear" class="button primary">Crear egreso</a>
+<table class="striped">
+<thead>
+<tr>
+  <th>Código de comprobante</th>
+  <th>Fecha de emisión</th>
+  <th>Justificación</th>
+  <th>Monto</th>
+</tr>
+</thead>
+<tbody>
+{% for egreso in evento.fk_caja.st_egresos|sort(attribute='fecha_emision') %}
+  <tr>
+    <td>{{ egreso.pk_id }}</td>
+    <td>{{ render_date(egreso.fecha_emision) }}</td>
+    <td>{{ egreso.descripcion }}</td>
+    <td>{{ render_money(egreso.monto) }}</td>
+  </tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

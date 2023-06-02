@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %} Crear egreso - {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Caja del evento {{ evento.nombre }}</h1>
+<h4>Saldo: <span style="padding-left:0.5em"></span>{{ render_money(evento.fk_caja.saldo) }}</h4>
+<h2>Crear egreso</h2>
+{{ render_form(form) }}
+{% endblock %}

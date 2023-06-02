@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Inscritos - {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Inscritos del evento "{{ evento.nombre }}"</h1>
+{% for paquete in evento.st_paquetes|sort(attribute='nombre') %}
+    <h2>Paquete {{ paquete.nombre }}</h2>
+    <hr>
+    {% for inscrito in paquete.st_inscritos|sort(attribute='nombre') %}
+        <div class=row>
+          <div class="col">
+            <p>{{ inscrito.nombre }}</p>
+          </div>
+          <div class="col">
+            <p>{{ inscrito.pk_id }}</p>
+          </div>
+          <div class="col">
+            <p>{{ inscrito.telefono }}</p>
+          </div>
+          <div class="col">
+            <p>{{ inscrito.email }}</p>
+          </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endfor %}
+{% endblock %}

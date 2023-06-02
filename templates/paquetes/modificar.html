@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} Crear paquete {% endblock %}
+{% block content %}
+<h1>Modificar paquete "{{ paquete.nombre }}"</h1>
+<p><a href="/paquete/{{ evento.get_pk() }}"><button>Deshacer cambios</button></a></p>
+{{ render_form(form) }}
+{% endblock %}

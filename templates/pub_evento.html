@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% from "form_render.html" import render_field %}
+{% block title %} {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>{{ evento.nombre }}</h1>
+<div class=row>
+  <div class="col-5 is-center">
+    <img src="{{ url_for('static', filename='img/' ~ evento.get_pk() ~ '.png') }}"
+         alt="{{ evento.nombre }}">
+  </div>
+  <div class=col>
+    {% if evento.fecha_inicio != None %}
+        <h2>Fecha</h2>
+        <p><b>Inicio:</b> {{ render_date(evento.fecha_inicio) }}<br><b>Fin:</b> {{ render_date(evento.fecha_fin) }}</p>
+    {% endif %}
+    <h2>Descripción</h2>
+    <p>{{ evento.descripcion }}</p>
+    {% if actividades|length > 0 %}
+    <h2>Actividades</h2>
+    {% for actividad in actividades %}
+        <div class="card" style="margin-bottom: 1em">
+        <h3>{{ actividad.nombre }}</h3>
+        <div class="row">
+            <div class="col-4">
+                <h4>Fecha</h4>
+                <p><b>Inicio:</b> {{ render_date(actividad.fecha_inicio) }}<br>
+                <b>Fin:</b> {{ render_date(actividad.fecha_fin) }}</p>
+            </div>
+            <div class="col">
+                <h4>Descripción</h4>
+                <p>{{ actividad.descripcion }}</p>
+            </div>
+        </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+<hr>
+{% if evento.st_paquetes.count() > 0 %}
+    
+    <div class="row">
+        <div class="col">
+            <h2>Preinscribirse</h2>
+            {{ render_form(form) }}
+        </div>
+        <div class="col">
+            <h2>Paquetes</h2>
+            {% for paquete in evento.st_paquetes|sort(attribute='precio') %}
+                <div class="card" style="margin-bottom:2em">
+                    <h4>{{ paquete.nombre }}</h4>
+                    <div class="row">
+                        <div class="col-5">
+                            <p><b>Precio:</b><br>{{ render_money(paquete.precio)}}</p>
+                        </div>
+                        <div class="col">
+                            <b>Actividades:</b>
+                            <ul>
+                                {% for actividad in paquete.st_actividades|sort(attribute='nombre') %}
+                                    <li>{{actividad.nombre}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

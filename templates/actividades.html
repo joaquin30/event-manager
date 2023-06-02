@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Eventos {% endblock %}
+{% block content %}
+<h1>Actividades por evento</h1>
+<hr>
+{% for evento in eventos %}
+<div class=row>
+  <div class="col">
+    <p>{{ evento.nombre }}</p>
+  </div>
+  <div class="col is-center">
+    <p>{{ render_date(evento.fecha_inicio) }}</p>
+  </div>
+  <div class="col is-center">
+    <p>{{ render_date(evento.fecha_fin) }}</p>
+  </div>
+  <div class="col is-center">
+    <a class="button" href="/actividades/{{ evento.get_pk() }}">Ver Actividades</a>
+  </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}

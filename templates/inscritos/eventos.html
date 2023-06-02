@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Eventos {% endblock %}
 {% block content %}
-<h1>Administrar eventos</h1>
-<p><a class="button primary" href="/eventos/crear">Crear evento</a></p>
+<h1>Paquetes por evento</h1>
 <hr>
 {% for evento in eventos %}
 <div class=row>
@@ -12,16 +11,14 @@
   <div class="col is-center">
     <p>{{ render_date(evento.fecha_inicio) }}</p>
   </div>
-    <div class="col is-center">
+  <div class="col is-center">
     <p>{{ render_date(evento.fecha_fin) }}</p>
   </div>
   <div class="col is-center">
-    <a class="button secondary" href="/eventos/modificar/{{ evento.get_pk() }}"><span class="icon-pencil"></span> Modificar</a>
+    <a class="button" href="/preinscritos/{{ evento.get_pk() }}">Ver preinscritos</a>
   </div>
   <div class="col is-center">
-    <form action="" method="post">
-    <button class="button error" name="eliminar" value="{{ evento.get_pk() }}"><span class="icon-trash"></span> Eliminar</button>
-    </form>
+    <a class="button" href="/inscritos/{{ evento.get_pk() }}">Ver inscritos</a>
   </div>
 </div>
 <hr>

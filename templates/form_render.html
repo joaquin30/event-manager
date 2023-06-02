@@ -1,9 +1,48 @@
 {% macro render_field(field) %}
-  {{ field.label }}<br>
-  {{ field(**kwargs)|safe }}<br>
-  {% if field.errors %}
-    {% for error in field.errors %}
-    <label class="text-error">{{ error }}</label><br>
-    {% endfor %}
-  {% endif %}
+    {{ field.label }}<br>
+    {% if field.type == 'MultiCheckboxField' %}
+        <ul>
+        {% for choice in field %}
+            <li>{{ choice(**kwargs)|safe }} {{ choice.label }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        {{ field(**kwargs)|safe }}<br>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <label class="text-error">{{ error }}</label><br>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_field_inline(field) %}
+  {{ field(**kwargs)|safe }}
+{% endmacro %}
+
+{% macro render_form(form) %}
+<form action="" method="post" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  {% for field in form %}
+    {% if field.type != 'CSRFTokenField'  %}
+      {% if field.type == 'SubmitField' %}
+        {{ render_field_inline(field) }}
+      {% else %}
+        {{ render_field(field) }}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</form>
+{% endmacro %}
+
+{% macro render_date(date) %}
+    {% if date != None %}
+        {{ date.strftime('%d/%m/%Y') }}
+    {% else %}
+        Sin fecha
+    {% endif %}
+{% endmacro %}
+
+{% macro render_money(money) %}
+    S/ {{ money }}
 {% endmacro %}

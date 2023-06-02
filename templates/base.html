@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% endblock %} - EventManager</title>
-<link rel="stylesheet" href="{{url_for('static',filename='normalize.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='chota.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/simple-line-icons.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/chota.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 <body>
 <header>
@@ -15,18 +16,25 @@
     <div class="nav-left">
       <b class="brand">EventManager</b>
       <div class="tabs">
-        <a href="/">Inicio</a>
-        <a href="/eventos">Eventos</a>
+          <a href="/">Inicio</a>
+          <a href="/eventos">Eventos</a>
+          <a href="/inscritos">Inscritos</a>
+          <a href="/actividades">Actividades</a>
+          <a href="/paquetes">Paquetes</a>
+          <a href="/caja">Caja</a>
       </div>
     </div>
-    <!--
+<!--
     <div class="nav-right">
       <a class="button outline" href="#">Iniciar sesión</a>
     </div>
-    -->
+-->
   </nav>
+</div>
 </header>
+
 <div class="container">
+{% from "form_render.html" import render_form, render_date, render_money %}
 {% for message in get_flashed_messages() %}
   <div class="flash">{{ message }}</div>
 {% endfor %}

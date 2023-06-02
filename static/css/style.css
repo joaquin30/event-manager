@@ -1,0 +1,26 @@
+header {
+    background-color: var(--bg-secondary-color);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+body {
+    margin-bottom: 2em;
+}
+
+textarea {
+    height: 10em;
+}
+
+summary:before {
+    font-family: "simple-line-icons";
+    /* codigo unicode de simple-line-icons, se pueden ver en su archivo .less en su pagina */
+    content: "\e606";
+    padding-left: 0.5em;
+    padding-right: 1em;
+}
+
+details[open] summary:before {
+    content: "\e604";
+}
