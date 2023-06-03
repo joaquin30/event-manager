@@ -29,7 +29,11 @@ class Preinscritos(Controlador):
         except:
             abort(404)
 
-        return render_template(self.template, evento=evento)
+        num_preinscritos = 0
+        for paquete in evento.st_paquetes:
+            num_preinscritos += paquete.st_preinscritos.count()
+            
+        return render_template(self.template, evento=evento, num_preinscritos=num_preinscritos)
                 
     def post(self, id_evento):
         try:
@@ -66,7 +70,11 @@ class Inscritos(Controlador):
         except:
             abort(404)
 
-        return render_template(self.template, evento=evento)
+        num_inscritos = 0
+        for paquete in evento.st_paquetes:
+            num_inscritos += paquete.st_inscritos.count()
+        
+        return render_template(self.template, evento=evento, num_inscritos=num_inscritos)
 
 route(pag_inscritos, Inscritos)
 

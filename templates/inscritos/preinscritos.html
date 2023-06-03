@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
-{% block title %} Inscritos de evento {{ evento.nombre }} {% endblock %}
+{% block title %} Preinscritos de evento {{ evento.nombre }} {% endblock %}
 {% block content %}
-<h1>Inscritos de evento "{{ evento.nombre }}"</h1>
-{% for paquete in evento.st_paquetes|sort(attribute='nombre') %}
+<h1>Preinscritos de evento "{{ evento.nombre }}"</h1>
+<h3>Número preinscritos: {{ num_preinscritos }}</h3>
+{% for paquete in evento.st_paquetes|sort(attribute='precio') %}
     <h2>Paquete {{ paquete.nombre }}</h2>
+    <h4>Número preinscritos: {{ paquete.st_preinscritos.count() }}</h4>
     <table class="striped">
     <thead>
         <tr>

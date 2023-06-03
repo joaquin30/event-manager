@@ -31,7 +31,7 @@ class Paquetes(Controlador):
             flash('Cree actividades en este evento para administrar los paquetes.', 'error')
             return redirect('/paquetes')
 
-        paquetes = orm.select(pq for pq in Paquete).order_by(lambda pq: pq.precio)
+        paquetes = orm.select(pq for pq in evento.st_paquetes).order_by(lambda pq: pq.precio)
         return render_template(self.template, evento=evento,
                 paquetes=paquetes)
                 

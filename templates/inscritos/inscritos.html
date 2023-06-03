@@ -2,8 +2,10 @@
 {% block title %} Inscritos de evento {{ evento.nombre }} {% endblock %}
 {% block content %}
 <h1>Inscritos de evento "{{ evento.nombre }}"</h1>
+<h3>Número preinscritos: {{ num_inscritos }}</h3>
 {% for paquete in evento.st_paquetes|sort(attribute='nombre') %}
     <h2>Paquete {{ paquete.nombre }}</h2>
+    <h4>Número inscritos: {{ paquete.st_inscritos.count() }}</h4>
     <table class="striped">
     <thead>
         <tr>
