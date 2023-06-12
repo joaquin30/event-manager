@@ -2,6 +2,6 @@
 {% block title %} Modificar actividad {{ actividad.nombre }} {% endblock %}
 {% block content %}
 <h1>Modificar actividad {{ actividad.nombre }}</h1>
-<p><a href="/actividad/{{ evento.get_pk() }}"><button>Deshacer cambios</button></a></p>
+<p><a href="/actividades/{{ evento.get_pk() }}"><button>Deshacer cambios</button></a></p>
 {{ render_form(form) }}
 {% endblock %}

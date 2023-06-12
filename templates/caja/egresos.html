@@ -4,7 +4,7 @@
 <h1>Caja de evento {{ evento.nombre }}</h1>
 <h4>Saldo:<span style="padding-left:0.5em"></span>{{ render_money(evento.fk_caja.saldo) }}</h4>
 <h2>Egresos</h2>
-<p><a href="/egresos/{{ evento.get_pk() }}/crear" class="button primary">Crear egreso</a>
+<p><a href="/caja/egresos/{{ evento.get_pk() }}/crear" class="button primary">Crear egreso</a>
 <table class="striped">
 <thead>
     <tr>

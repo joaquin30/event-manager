@@ -17,3 +17,37 @@ textarea {
     display: inline;
     margin: auto 0;
 }
+
+/* intento de scrollbar
+ * funciona en el navbar pero no en tablas
+.scroll {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}*/
+
+.print {
+    display: none;
+}
+
+@media print {
+    @page {
+      margin: 0;
+      size: 5cm 6cm;
+    }
+    html,body {
+        width: 5cm;
+        height: 6cm;
+        padding: 0.25cm;
+        overflow: hidden;
+    }
+    .print {
+        font-size: 8pt;
+        display: block;
+    }
+    img {
+        width: 3.5cm;
+        height: 3.5cm;
+        margin: 0 0.375cm;
+    }
+}

@@ -22,7 +22,7 @@ route(pag_caja, Eventos)
 
 class Ingresos(Controlador):
     template = 'caja/ingresos.html'
-    url = '/ingresos/<int:id_evento>'
+    url = '/caja/ingresos/<int:id_evento>'
 
     def get(self, id_evento):
         try:
@@ -37,7 +37,7 @@ route(pag_caja, Ingresos)
 
 class Egresos(Controlador):
     template = 'caja/egresos.html'
-    url = '/egresos/<int:id_evento>'
+    url = '/caja/egresos/<int:id_evento>'
 
     def get(self, id_evento):
         try:
@@ -52,7 +52,7 @@ route(pag_caja, Egresos)
 
 class CrearEgreso(Controlador):
     template = 'caja/crear_egreso.html'
-    url = '/egresos/<int:id_evento>/crear'
+    url = '/caja/egresos/<int:id_evento>/crear'
 
     def get(self, id_evento):
         try:
@@ -79,7 +79,7 @@ class CrearEgreso(Controlador):
                 
             if evento.fk_caja.saldo - form.monto.data < Decimal(0):
                 flash('Monto supera al saldo actual.', 'error')
-                return redirect(f'/egresos/{id_evento}/crear')
+                return redirect(f'/caja/egresos/{id_evento}/crear')
                 
             egreso = Egreso(
                 pk_id=form.codigo.data,
@@ -90,9 +90,9 @@ class CrearEgreso(Controlador):
             evento.fk_caja.saldo -= egreso.monto
             orm.commit()
             flash('Egreso creado exitosamente.')
-            return redirect(f'/egresos/{id_evento}')
+            return redirect(f'/caja/egresos/{id_evento}')
         else:
             flash('Errores en el formulario.', 'error')
-            return redirect(f'/egresos/{id_evento}/crear')
+            return redirect(f'/caja/egresos/{id_evento}/crear')
 
 route(pag_caja, CrearEgreso)

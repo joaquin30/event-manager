@@ -5,6 +5,7 @@ from app import Controlador, route, obtenerTodo
 from forms import FormCrearPaquete, FormModificarPaquete
 from uuid import uuid4
 from datetime import date
+import qrcode
 
 pag_inscritos = Blueprint('inscritos', __name__)
 
@@ -21,7 +22,7 @@ route(pag_inscritos, Eventos)
 
 class Preinscritos(Controlador):
     template = 'inscritos/preinscritos.html'
-    url = '/preinscritos/<int:id_evento>'
+    url = '/inscritos/preinscritos/<int:id_evento>'
 
     def get(self, id_evento):
         try:
@@ -46,6 +47,8 @@ class Preinscritos(Controlador):
 
         paquete.st_preinscritos.remove(inscrito)
         paquete.st_inscritos.add(inscrito)
+        qr = qrcode.make(inscrito.get_pk())
+        qr.save(f'static/qr/{inscrito.get_pk()}.png')
         comprobante = Comprobante(
             pk_id=str(uuid4()),
             fk_caja=evento.fk_caja,
@@ -55,7 +58,7 @@ class Preinscritos(Controlador):
             monto=paquete.precio)
         evento.fk_caja.saldo += comprobante.monto
         orm.commit()
-        return redirect(f'/preinscritos/{id_evento}')
+        return redirect(f'/inscritos/preinscritos/{id_evento}?id={inscrito.pk_id}')
 
 route(pag_inscritos, Preinscritos)
 

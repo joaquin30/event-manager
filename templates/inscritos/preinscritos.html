@@ -24,11 +24,20 @@
         <td>{{ inscrito.telefono }}</td>
         <td>{{ inscrito.correo }}</td>
         <td><form action="" method="post">
-            <button class="button primary" name="inscribir" value="{{ inscrito.get_pk() }} {{ paquete.get_pk() }}">Inscribir</button>
+                <button class="button primary" name="inscribir" onclick="$('#{{inscrito.pk_id}}').printThis()"
+                value="{{ inscrito.get_pk() }} {{ paquete.get_pk() }}">Inscribir</button>
         </form></td>
     </tr>
     {% endfor %}
     </tbody>
     </table>
+    {% for inscrito in paquete.st_inscritos %}
+        <div id="{{inscrito.pk_id}}" class="print">
+            <p><b>{{ evento.nombre }}</b><br>
+            <b><em>{{ paquete.nombre }}</em></b><br>
+            {{ inscrito.nombre }} - <em>{{ inscrito.pk_id }}</em></p>
+            <img src="/static/qr/{{ inscrito.pk_id }}.png">
+        </div>
+    {% endfor %}
 {% endfor %}
 {% endblock %}

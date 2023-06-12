@@ -7,6 +7,7 @@ function rtrim(str, ch) {
 var links = document.getElementsByClassName("navbar-link");
 var current_url = window.location.href;
 var is_setted = false;
+
 for (var i = 0; i < links.length; ++i) {
     if (current_url.startsWith(links[i].href) && rtrim(links[i].href, '/') !== window.location.origin) {
         links[i].classList.add("active");

@@ -117,7 +117,7 @@ class ModificarActividad(Controlador):
         form.fecha_inicio.data = actividad.fecha_inicio
         form.fecha_fin.data = actividad.fecha_fin
         return render_template(self.template,
-                url=f'/actividad/{id_evento}/modificar/{id_actividad}',
+                url=f'/actividades/{id_evento}/modificar/{id_actividad}',
                 form=form, actividad=actividad, evento=evento)
 
     def post(self, id_evento, id_actividad):
