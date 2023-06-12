@@ -2,7 +2,7 @@
 **/*.pyc
 **/__pycache__/
 docs/
-*.plantuml
-*.dot
-*.png
+./*.plantuml
+./*.dot
+./*.png
 pruebas/
