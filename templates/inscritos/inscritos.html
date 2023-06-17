@@ -22,7 +22,7 @@
         <td>{{ inscrito.pk_id }}</td>
         <td>{{ inscrito.telefono }}</td>
         <td>{{ inscrito.correo }}</td>
-        <td><button class="button primary" onsubmit="$('#{{inscrito.pk_id}}').printThis()">Imprimir</button></td>
+        <td><button class="button primary" onclick="$('#{{inscrito.pk_id}}').printThis()">Imprimir</button></td>
         <div id="{{inscrito.pk_id}}" class="print">
             <p><b>{{ evento.nombre }}</b><br>
             <b><em>{{ paquete.nombre }}</em></b><br>
