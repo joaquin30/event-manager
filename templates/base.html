@@ -7,8 +7,10 @@
 <link rel="icon" type="image/png" href="{{url_for('static',filename='img/favicon.png')}}" />
 <link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
 <link rel="stylesheet" href="{{url_for('static',filename='css/chota.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
-<script src="/static/scripts/jquery-3.7.0.js"></script>
+<link rel="stylesheet" href="/static/css/jquery-ui.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="/static/scripts/jquery.js"></script>
+<script src="/static/scripts/jquery-ui.js"></script>
 <script src="/static/scripts/printThis.js"></script>
 <script src="/static/scripts/decorateNavbar.js" defer></script>
 <script src="/static/scripts/printID.js" defer></script>
@@ -20,25 +22,40 @@
     <div class="nav-left">
         <img src="/static/img/favicon.png" class="img-inline">
         <b class="brand">EventManager</b>
-      <div class="tabs">
-          <a class="navbar-link" href="/">Inicio</a>
-          <a class="navbar-link" href="/eventos">Eventos</a>
-          <a class="navbar-link" href="/actividades">Actividades</a>
-          <a class="navbar-link" href="/paquetes">Paquetes</a>
-          <a class="navbar-link" href="/inscritos">Inscritos</a>
-          <a class="navbar-link" href="/caja">Caja</a>
-      </div>
     </div>
-<!--
     <div class="nav-right">
-      <a class="button outline" href="#">Iniciar sesión</a>
+    {% if is_logged_in() %}
+      <a class="button outline" href="/logout">Cerrar sesión</a>
+    {% else %}
+      <a class="button outline" href="/login">Iniciar sesión</a>
+    {% endif %}
     </div>
--->
   </nav>
 </div>
 </header>
 {% from 'utils.html' import render_form, render_field, render_date, render_money %}
 <div class="container">
+<div class="row">
+{% if is_logged_in() %}
+<div class="col-2">
+  <table class="striped">
+    <tr><td><a class="navbar-link" href="/">Inicio</a></td></tr>
+    <tr><td><a class="navbar-link" href="/ambientes">Ambientes</a></td></tr>
+    <tr><td><a class="navbar-link" href="/eventos">Eventos</a></td></tr>
+    <tr><td><a class="navbar-link" href="/actividades">Actividades</a></td></tr>
+    <tr><td><a class="navbar-link" href="/paquetes">Paquetes</a></td></tr>
+    <tr><td><a class="navbar-link" href="/inscritos">Preinscritos e inscritos</a></td></tr>
+    <tr><td><a class="navbar-link" href="/caja">Caja</a></td></tr>
+    <tr><td><a class="navbar-link" href="/colaborador">Asistencia y materiales</a></td></tr>
+    {% if is_logged_in("admin") %}
+    <tr><td><a class="navbar-link" href="/roles">Cuentas y roles</a></td></tr>
+    <tr><td><a class="navbar-link" href="/comisiones">Comisiones</a></td></tr>
+    <tr><td><a class="navbar-link" href="/reportes">Reportes</a></td></tr>
+    {% endif %}
+  </table>
+</div>
+{% endif %}
+<div class="col">
 {% with messages = get_flashed_messages(with_categories=True) %}
   {% for category, message in messages %}
     {% if category == 'error' %}
@@ -49,6 +66,8 @@
   {% endfor %}
 {% endwith %}
 {% block content %}{% endblock %}
+</div>
+</div>
 </div>
 </body>
 </html>

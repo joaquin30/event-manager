@@ -1,52 +1,56 @@
 from pony.orm import *
-from datetime import date
-from decimal import Decimal
+
+# Acá esta declarado todo el modelo fisico del sistema
 
 db = Database()
 
 class Cuenta(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
-    st_colaborador_eventos = Set('Evento', reverse='st_colaboradores')
-    st_encargado_eventos = Set('Evento', reverse='st_encargados')
-    usuario = Required(str)
+    usuario = Required(str, unique=True, index=True)
     contrasenha = Required(str)
-    superusuario = Optional(bool)
+    tipo = Required(str)
 
 class Evento(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
     fk_caja = Optional('Caja', cascade_delete=True)
-    st_colaboradores = Set('Cuenta')
-    st_encargados = Set('Cuenta')
     st_paquetes = Set('Paquete')
     st_actividades = Set('Actividad')
     nombre = Required(str)
     descripcion = Required(str)
-    fecha_inicio = Optional(date)
-    fecha_fin = Optional(date)
+    fecha_inicio = Optional(str)
+    fecha_fin = Optional(str)
 
 class Actividad(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
     fk_evento = Required('Evento')
     fk_ambiente = Optional('Ambiente')
-    st_materiales = Set('Material')
     st_paquetes = Set('Paquete')
-    nombre = Required(str)
+    st_materiales = Set('Material')
+    st_asistentes = Set('Inscrito')
+    st_participantes = Set('Participante')
+    nombre = Required(str, index=True)
     descripcion = Required(str)
-    fecha_inicio = Required(date)
-    fecha_fin = Required(date)
+    fecha_inicio = Required(str)
+    fecha_fin = Required(str)
 
 class Ambiente(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
     set_actividades = Set('Actividad')
-    nombre = Required(str)
+    nombre = Required(str, index=True, unique=True)
     aforo = Required(int)
     locacion = Required(str)
 
 class Material(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
     fk_actividad = Required('Actividad')
-    nombre = Required(str)
+    nombre = Required(str, index=True)
     cantidad = Required(int)
+
+class Participante(db.Entity):
+    pk_id = PrimaryKey(int, auto=True)
+    fk_actividad = Required('Actividad')
+    nombre = Required(str)
+    correo = Required(str)
 
 class Paquete(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
@@ -54,21 +58,22 @@ class Paquete(db.Entity):
     st_actividades = Set('Actividad')
     st_inscritos = Set('Inscrito', reverse='st_inscrito_paquetes')
     st_preinscritos = Set('Inscrito', reverse='st_preinscrito_paquetes')
-    nombre = Required(str)
-    precio = Required(Decimal)
+    nombre = Required(str, index=True)
+    precio = Required(int)
 
 class Caja(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
     fk_evento = Required('Evento')
     st_comprobantes = Set('Comprobante')
     st_egresos = Set('Egreso')
-    saldo = Required(Decimal)
+    saldo = Required(int)
 
 class Inscrito(db.Entity):
-    pk_id = PrimaryKey(int, auto=True)
+    pk_id = PrimaryKey(str, auto=True)
     st_inscrito_paquetes = Set('Paquete')
     st_preinscrito_paquetes = Set('Paquete')
     st_comprobantes = Set('Comprobante')
+    st_actividades = Set('Actividad')
     nombre = Required(str)
     telefono = Required(str)
     correo = Required(str)
@@ -78,15 +83,15 @@ class Comprobante(db.Entity):
     fk_caja = Required('Caja')
     fk_inscrito = Required('Inscrito')
     descripcion = Required(str)
-    fecha_emision = Required(date)
-    monto = Required(Decimal)
+    fecha_emision = Required(str, index=True)
+    monto = Required(int)
 
 class Egreso(db.Entity):
     pk_id = PrimaryKey(str)
     fk_caja = Required('Caja')
     descripcion = Required(str)
-    fecha_emision = Required(date)
-    monto = Required(Decimal)
+    fecha_emision = Required(str, index=True)
+    monto = Required(int)
 
 db.bind(provider='sqlite', filename='database.sqlite', create_db=True)
 db.generate_mapping(create_tables=True)

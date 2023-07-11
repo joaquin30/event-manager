@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Materiales de actividad {{ actividad.nombre }} {% endblock %}
+{% block content %}
+<h1>Materiales de actividad {{ actividad.nombre }} </h1>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Nombre de material</th>
+        <th>Cantidad de unidades</th>
+    </tr>
+</thead>
+<tbody>
+{% for material in materiales %}
+<tr>
+    <td>{{ material.nombre }}</td>
+    <td>{{ material.cantidad }}</td>
+    {% if material.cantidad > 0 %}
+    <td><form action="" method="post">
+        <button class="button primary" name="material" value="{{ material.pk_id }}">Usar una unidad</button>
+    </form></td>
+    {% else %}
+    <td><span class="tag">Sin unidades</span></td>
+    {% endif %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

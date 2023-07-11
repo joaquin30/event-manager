@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Ambientes {% endblock %}
+{% block content %}
+<h1>Administrar ambientes</h1>
+<p><a class="button primary" href="/ambientes/crear">Crear ambiente</a></p>
+<table class="striped">
+<thead>
+  <th>Nombre de ambiente</th>
+  <th>Aforo</th>
+  <th>Locación</th>
+  <th></th>
+  <th></th>
+</thead>
+<tbody>
+{% for ambiente in ambientes %}
+<tr>
+  <td>{{ ambiente.nombre }}</td>
+  <td>{{ ambiente.aforo }}</td>
+  <td>{{ ambiente.locacion }}</td>
+  <td><a class="button secondary" href="/ambientes/modificar/{{ ambiente.get_pk() }}">Modificar</a></td>
+  <td><form action="" method="post">
+    <button class="button error" name="eliminar" value="{{ ambiente.get_pk() }}">Eliminar</button>
+  </form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

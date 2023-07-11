@@ -35,14 +35,12 @@
 </form>
 {% endmacro %}
 
+{# Para imprimir la fecha #}
 {% macro render_date(date) %}
-    {% if date != None %}
-        {{ date.strftime('%d/%m/%Y') }}
-    {% else %}
-        Sin fecha
-    {% endif %}
+    {{ date | format_date }}
 {% endmacro %}
 
+{# Para imprimir dinero #}
 {% macro render_money(money) %}
-    S/ {{ money }}
+    {{ money | format_money }}
 {% endmacro %}

@@ -7,6 +7,7 @@ from datetime import date
 
 pag_eventos = Blueprint('eventos', __name__)
 
+# Pagina de todos los evento
 class Eventos(Controlador):
     url = '/eventos'
     template = 'eventos/eventos.html'
@@ -18,7 +19,6 @@ class Eventos(Controlador):
     def post(self):
         id_evento = request.form.get('eliminar')
         Evento[id_evento].delete()
-        orm.commit()
         return redirect(self.url)
 
 route(pag_eventos, Eventos)
@@ -37,11 +37,14 @@ class CrearEvento(Controlador):
         if form.validate():
             evento = Evento(nombre=form.nombre.data,
                     descripcion=form.descripcion.data)
+                    
+            # Creamos una caja automaticamente
             evento.fk_caja = Caja(saldo=0, fk_evento=evento)
-            orm.commit()
             img = form.img.data
+
+            # guardamos la imagen elegida
             img.save(f'static/img/{evento.get_pk()}.png')
-            flash(f'Evento "{evento.nombre}" creado. Crea paquetes para que se habilite la preinscripción.')
+            flash(f'Evento "{evento.nombre}" creado. Crea actividades para que se muestre en inicio.')
             return redirect('/eventos')
         else:
             flash('Errores en el formulario.', 'error')
@@ -63,6 +66,7 @@ class ModificarEvento(Controlador):
         except:
             abort(404)
 
+        # ponemos los datos del evento en el formulario
         form.nombre.data = evento.nombre
         form.descripcion.data = evento.descripcion
         return render_template(self.template,
@@ -79,7 +83,8 @@ class ModificarEvento(Controlador):
 
             evento.nombre = form.nombre.data
             evento.descripcion = form.descripcion.data
-            orm.commit()
+            
+            # Si se subió una nueva imagen sobreescribimos sobre la antigua
             if form.img.data is not None:
                 img = form.img.data
                 img.save(f'static/img/{id_evento}.png')

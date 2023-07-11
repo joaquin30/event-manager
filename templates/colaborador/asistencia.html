@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Asistencia de actividad {{ actividad.nombre }} {% endblock %}
+{% block content %}
+<h1>Asistencia de actividad {{ actividad.nombre }} </h1>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Nombre de inscrito</th>
+        <th>Documento de identidad</th>
+    </tr>
+</thead>
+<tbody>
+{% for inscrito in inscritos %}
+<tr>
+    <td>{{ inscrito.nombre }}</td>
+    <td>{{ inscrito.pk_id }}</td>
+    {% if not inscrito in actividad.st_asistentes %}
+    <td><form action="" method="post">
+        <button class="button primary" name="asistente" value="{{ inscrito.pk_id }}">Marcar asistencia</button>
+    </form></td>
+    {% else %}
+    <td><span class="tag text-primary bd-primary">Asistió</span></td>
+    {% endif %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

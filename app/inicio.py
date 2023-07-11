@@ -11,13 +11,13 @@ class Inicio(Controlador):
     template = 'inicio/inicio.html'
     
     def get(self):
-        eventos = orm.select(ev for ev in Evento if ev.fecha_inicio is not None) \
+        eventos = orm.select(ev for ev in Evento if ev.fecha_inicio) \
             .order_by(lambda ev: orm.desc(ev.fecha_inicio))
         return render_template(self.template, eventos=eventos)
 
 route(pag_inicio, Inicio)
 
-
+# La pagina individual de un evento publico
 class PublicacionEvento(Controlador):
     url = '/<int:id_evento>'
     template = 'inicio/evento.html'
@@ -47,18 +47,20 @@ class PublicacionEvento(Controlador):
         if form.validate():
             doc_identidad = form.doc_identidad.data
             inscrito = Inscrito.get(pk_id=doc_identidad)
+            # Si el preinscrito no esta en la base de datos creamos uno nuevo
             if inscrito is None:
                 inscrito = Inscrito(
                             pk_id=doc_identidad,
                             nombre=form.nombre.data,
                             telefono=form.telefono.data,
                             correo=form.correo.data)
+            # Sino actualizamos sus datos con los nuevo ingresados
             else:
                 inscrito.nombre = form.nombre.data
                 inscrito.telefono = form.telefono.data
                 inscrito.correo = form.correo.data
-            orm.commit()
 
+            # Si el preinscrito ya se registro a este evento
             for paquete in evento.st_paquetes:
                 if inscrito in paquete.st_inscritos or inscrito in paquete.st_preinscritos:
                     flash('Ya te preinscribiste antes.', 'error')

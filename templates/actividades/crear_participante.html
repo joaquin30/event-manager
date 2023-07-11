@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} Añadir participante{% endblock %}
+{% block content %}
+<h1>Añadir participante</h1>
+<p><a href="/actividades/{{ evento.pk_id }}/participantes/{{ actividad.pk_id }}"><button>Deshacer cambios</button></a></p>
+{{ render_form(form) }}
+{% endblock %}

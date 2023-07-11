@@ -13,9 +13,14 @@ textarea {
     height: 10em;
 }
 
+/* para el logo */
 .img-inline {
     display: inline;
     margin: auto 0;
+}
+
+.navbar-active {
+    text-decoration-line: underline;
 }
 
 /* intento de scrollbar
@@ -30,6 +35,7 @@ textarea {
     display: none;
 }
 
+/* para imprimir los QR */
 @media print {
     @page {
       margin: 0;

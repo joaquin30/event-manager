@@ -45,19 +45,23 @@ class Preinscritos(Controlador):
         except:
             abort(404)
 
+        # movemos del grupo de preinscritos a los inscritos
         paquete.st_preinscritos.remove(inscrito)
         paquete.st_inscritos.add(inscrito)
+
+        # generamos su codigo qr
         qr = qrcode.make(inscrito.get_pk())
         qr.save(f'static/qr/{inscrito.get_pk()}.png')
+
+        # generamos el comprobante
         comprobante = Comprobante(
             pk_id=str(uuid4()),
             fk_caja=evento.fk_caja,
             fk_inscrito=inscrito,
             descripcion=f'Compra de paquete {paquete.nombre} del evento {evento.nombre}',
-            fecha_emision=date.today(),
+            fecha_emision=date.today().isoformat(),
             monto=paquete.precio)
         evento.fk_caja.saldo += comprobante.monto
-        orm.commit()
         return redirect(f'/inscritos/preinscritos/{id_evento}?id={inscrito.pk_id}')
 
 route(pag_inscritos, Preinscritos)
@@ -73,6 +77,7 @@ class Inscritos(Controlador):
         except:
             abort(404)
 
+        # obtenemos el numero total de inscritos
         num_inscritos = 0
         for paquete in evento.st_paquetes:
             num_inscritos += paquete.st_inscritos.count()
