@@ -29,7 +29,7 @@ class MultiCheckboxAtLeastOne():
         self.message = message
 
     def __call__(self, form, field):
-        if len(field.data) == 0:
+        if len(field.data)==0:
             raise StopValidation(self.message)
 
 class FormCrearAmbiente(FlaskForm):
@@ -121,4 +121,12 @@ class FormComisionAgregarCuenta(FlaskForm):
     rol = RadioField('Rol en la comisión', [DataRequired()],
             choices=[('encargado','Encargado'),('colaborador','Colaborador')])
     submit = SubmitField('Agregar cuenta')
+
+class FormReporte(FlaskForm):
+    fecha_inicio = DateField('Fecha de inicio de los ingresos/egresos', [DataRequired()])
+    fecha_fin = DateField('Fecha de fin de los ingresos/egresos', [DataRequired()])
+    modulos = MultiCheckboxField('Selecciona los módulos para generar el reporte', [MultiCheckboxAtLeastOne()],
+        choices=[('ingresos','Ingresos'), ('egresos','Egresos'), ('preinscritos','Preinscritos'), ('inscritos','Inscritos'),
+         ('materiales','Materiales'), ('asistencia','Asistencia')])
+    submit = SubmitField('Generar Reporte')
 

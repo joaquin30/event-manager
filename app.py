@@ -31,7 +31,8 @@ from app.cuentas import pag_cuentas
 app.register_blueprint(pag_cuentas)
 from app.comisiones import pag_comisiones
 app.register_blueprint(pag_comisiones)
-
+from app.reportes import pag_reportes
+app.register_blueprint(pag_reportes)
 
 # Creamos la cuenta admin
 with orm.db_session:

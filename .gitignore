@@ -9,3 +9,4 @@ static/img/
 static/qr/
 pruebas/
 database.sqlite
+static/*.xlsx

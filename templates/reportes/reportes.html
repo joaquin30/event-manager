@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %} Generar reporte de evento {{evento.nombre}} {% endblock %}
+{% block content %}
+<h1>Generar reporte de evento {{evento.nombre}}</h1>
+{{ render_form(form) }}
+{% endblock %}

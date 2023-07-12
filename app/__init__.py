@@ -49,4 +49,12 @@ def es_superusuario(user):
     if len(query) == 0 or not query.first().superusuario:
         return "La cuenta no tiene rol de superusuario"
 
-
+def addSheet(book, name, dict_list):
+    book.create_sheet(name)
+    if not dict_list:
+        # en caso que no haya ningun dato dejamos al hoja vacia
+        return
+    book[name].append(list(dict_list[0].keys()))
+    for d in dict_list:
+        book[name].append(list(d.values()))
+    
