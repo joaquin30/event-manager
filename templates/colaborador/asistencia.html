@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Asistencia de actividad {{ actividad.nombre }} {% endblock %}
 {% block content %}
+<script src="/static/scripts/qr-scan.js" defer></script>
 <h1>Asistencia de actividad {{ actividad.nombre }} </h1>
+<button id="qr-button" onclick="startScan();">Escanear código QR</button>
+<video id="qr-video" style="width:0"></video>
 <table class="striped">
 <thead>
     <tr>

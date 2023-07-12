@@ -43,7 +43,7 @@
   </div>
 </div>
 <hr>
-{% if evento.st_paquetes.count() > 0 %}
+{% if evento.st_paquetes.count() > 0 and not is_logged_in() %}
     
     <div class="row">
         <div class="col">

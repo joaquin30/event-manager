@@ -48,6 +48,7 @@ class Asistencia(Controlador):
         inscritos = []
         for paquete in actividad.st_paquetes:
             inscritos += list(paquete.st_inscritos)
+        inscritos.sort(key=lambda x: x.nombre)
             
         return render_template(self.template, inscritos=inscritos, actividad=actividad)
                 
@@ -57,6 +58,7 @@ class Asistencia(Controlador):
             actividad = Actividad[id_actividad]
             # añadimos el asistente a la lista de asistencia de la actividad
             id_asistente = request.form.get('asistente')
+            print(id_asistente)
             actividad.st_asistentes.add(Inscrito[id_asistente])
             flash('Asistencia marcada')
         except:

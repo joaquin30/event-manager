@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Inscritos de evento {{ evento.nombre }} {% endblock %}
 {% block content %}
+<script src="/static/scripts/printID.js" defer></script>
 <h1>Inscritos de evento "{{ evento.nombre }}"</h1>
 <h3>Número preinscritos: {{ num_inscritos }}</h3>
 {% for paquete in evento.st_paquetes|sort(attribute='nombre') %}

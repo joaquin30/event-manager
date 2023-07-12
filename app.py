@@ -86,4 +86,4 @@ def is_superuser(user):
     return len(query) > 0 and query.first().superusuario
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, ssl_context='adhoc')
