@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% block title %} Actividades {% endblock %}
+{% block title %} Comisiones {% endblock %}
 {% block content %}
-<h1>Actividades por evento</h1>
+<h1>Comisiones por evento</h1>
 <table class="striped">
 <thead>
     <tr>
@@ -17,7 +17,7 @@
     <td>{{ evento.nombre }}</td>
     <td>{{ render_date(evento.fecha_inicio) }}</td>
     <td>{{ render_date(evento.fecha_fin) }}</td>
-    <td><a class="button" href="/actividades/{{ evento.get_pk() }}">Ver Actividades</a></td>
+    <td><a class="button" href="/comisiones/{{ evento.get_pk() }}">Administrar comisiones</a></td>
 </tr>
 {% endfor %}
 </tbody>

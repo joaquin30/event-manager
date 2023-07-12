@@ -1,7 +1,0 @@
-{% extends 'base.html' %}
-{% block title %} Añadir material{% endblock %}
-{% block content %}
-<h1>Añadir material</h1>
-<p><a href="/actividades/{{ evento.pk_id }}/materiales/{{ actividad.pk_id }}"><button>Deshacer cambios</button></a></p>
-{{ render_form(form) }}
-{% endblock %}

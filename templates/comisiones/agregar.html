@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Añadir cuenta a comisión {% endblock %}
+{% block content %}
+<script>
+$( function() {
+    var availableTags = [
+        {% for cuenta in cuentas %}
+            "{{ cuenta.usuario }}",
+        {% endfor %}
+    ];
+    $( "#cuenta" ).autocomplete({
+      source: availableTags
+    });
+} );
+</script>
+<h1>Añadir cuenta a comisión</h1>
+<p><a class="button" href="/comisiones/{{ evento.pk_id }}">Deshacer cambios</a></p>
+{{ render_form(form) }}
+{% endblock %}

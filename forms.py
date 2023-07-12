@@ -115,3 +115,10 @@ class FormCrearCuenta(FlaskForm):
     usuario = StringField('Usuario', [DataRequired()])
     contrasenha = StringField('Contraseña', [DataRequired()])
     submit = SubmitField('Crear cuenta')
+
+class FormComisionAgregarCuenta(FlaskForm):
+    cuenta = StringField('Cuenta', [DataRequired()])
+    rol = RadioField('Rol en la comisión', [DataRequired()],
+            choices=[('encargado','Encargado'),('colaborador','Colaborador')])
+    submit = SubmitField('Agregar cuenta')
+

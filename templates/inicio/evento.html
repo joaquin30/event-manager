@@ -2,6 +2,7 @@
 {% block title %} {{ evento.nombre }} {% endblock %}
 {% block content %}
 <h1>{{ evento.nombre }}</h1>
+<p><a class="button outline" href="/">Volver al inicio</a></p>
 <div class=row>
   <div class="col-5 is-center">
     <img src="{{ url_for('static', filename='img/' ~ evento.get_pk() ~ '.png') }}"

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} Comisión de evento {{ evento.nombre }} {% endblock %}
+{% block content %}
+<h1>Comisión de evento {{ evento.nombre }}</h1>
+<p><a class="button primary" href="/comisiones/{{evento.pk_id}}/agregar">Agregar cuenta</a></p>
+<div class="row">
+<div class="col">
+<h2>Encargados</h2>
+<table class="striped">
+<thead>
+<tr>
+    <th>Cuentas</th>
+    <th></th>
+</tr>
+</thead>
+<tbody>
+{% for cuenta in evento.st_encargados %}
+<tr>
+    <td>{{ cuenta.usuario }}</td>
+    <td><form action="" method="post">
+        <button class="button error" name="eliminar" value="{{ cuenta.pk_id }}">Eliminar</button>
+    </form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<div class="col">
+<h2>Colaboradores</h2>
+<table class="striped">
+<thead>
+<tr>
+    <th>Cuentas</th>
+    <th></th>
+</tr>
+</thead>
+<tbody>
+{% for cuenta in evento.st_colaboradores %}
+<tr>
+    <td>{{ cuenta.usuario }}</td>
+    <td><form action="" method="post">
+        <button class="button error" name="eliminar" value="{{ cuenta.pk_id }}">Eliminar</button>
+    </form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+{% endblock %}
