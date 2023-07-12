@@ -1,9 +1,11 @@
-from flask.views import MethodView
+from flask.views import MethodView, request
 from pony import orm
-from models import Evento
+from models import Evento, Cuenta
+from flask_simplelogin import login_required
 
 class Controlador(MethodView):
     init_every_request = False
+    decorators = [login_required]
 
 # Usa el blueprint (modulo) para enrutar el controlador hacia su url
 def route(blueprint, controller):
@@ -24,8 +26,7 @@ def obtenerTodo(Model, reverse=False):
     else:
         lista += list(orm.select(model for model in Model if model.fecha_inicio) \
             .order_by(lambda model: model.fecha_inicio))
-    for i in lista:
-        print(type(i.fecha_inicio), i.fecha_inicio)
+    
     return lista
 
 # Funciones de ayuda para tratar con dinero
@@ -41,3 +42,11 @@ def intToDecimal(val):
     if x < 10:
         x = f'0{x}'
     return Decimal(f'{val//100}.{x}')
+
+# Verifica que el usario sea un superusario
+def es_superusuario(user):
+    query = orm.select(cuenta for cuenta in Cuenta if cuenta.usuario == user)
+    if len(query) == 0 or not query.first().superusuario:
+        return "La cuenta no tiene rol de superusuario"
+
+

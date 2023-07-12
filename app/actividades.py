@@ -1,7 +1,7 @@
 from flask import render_template, redirect, flash, abort, Blueprint, request
 from models import Evento, Actividad, Ambiente, Participante, Material
 from pony import orm
-from app import Controlador, route, obtenerTodo
+from app import *
 from forms import FormCrearActividad, FormModificarActividad, FormCrearParticipante, FormCrearMaterial
 from datetime import date
 
@@ -115,6 +115,7 @@ class CrearActividad(Controlador):
 route(pag_actividades, CrearActividad)
 
 class ModificarActividad(Controlador):
+    decorators = [login_required]
     url = '/actividades/<int:id_evento>/modificar/<int:id_actividad>'
     template = 'actividades/modificar.html'
 
@@ -185,6 +186,7 @@ route(pag_actividades, ModificarActividad)
 
 
 class Participantes(Controlador):
+    decorators = [login_required]
     template = 'actividades/participantes.html'
     url = '/actividades/<int:id_evento>/participantes/<int:id_actividad>'
 
@@ -215,6 +217,7 @@ route(pag_actividades, Participantes)
 
 
 class CrearParticipante(Controlador):
+    decorators = [login_required]
     template = 'actividades/crear_participante.html'
     url = '/actividades/<int:id_evento>/participantes/<int:id_actividad>/crear'
 
@@ -254,6 +257,7 @@ route(pag_actividades, CrearParticipante)
 
 # Basicamente un copy/paste de Participante
 class Materiales(Controlador):
+    decorators = [login_required]
     template = 'actividades/materiales.html'
     url = '/actividades/<int:id_evento>/materiales/<int:id_actividad>'
 
@@ -284,6 +288,7 @@ route(pag_actividades, Materiales)
 
 
 class CrearMaterial(Controlador):
+    decorators = [login_required]
     template = 'actividades/crear_material.html'
     url = '/actividades/<int:id_evento>/materiales/<int:id_actividad>/crear'
 

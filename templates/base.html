@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% block title %}{% endblock %} - EventManager</title>
-<link rel="icon" type="image/png" href="{{url_for('static',filename='img/favicon.png')}}" />
-<link rel="stylesheet" href="{{url_for('static',filename='css/normalize.css')}}">
-<link rel="stylesheet" href="{{url_for('static',filename='css/chota.css')}}">
+<link rel="icon" type="image/png" href="/static/css/favicon.png" />
+<link rel="stylesheet" href="/static/css/normalize.css">
+<link rel="stylesheet" href="/static/css/chota.css">
 <link rel="stylesheet" href="/static/css/jquery-ui.css">
 <link rel="stylesheet" href="/static/css/style.css">
 <script src="/static/scripts/jquery.js"></script>
@@ -20,7 +20,7 @@
 <div class="container">
   <nav class="nav">
     <div class="nav-left">
-        <img src="/static/img/favicon.png" class="img-inline">
+        <img src="/static/css/favicon.png" class="img-inline">
         <b class="brand">EventManager</b>
     </div>
     <div class="nav-right">
@@ -47,8 +47,8 @@
     <tr><td><a class="navbar-link" href="/inscritos">Preinscritos e inscritos</a></td></tr>
     <tr><td><a class="navbar-link" href="/caja">Caja</a></td></tr>
     <tr><td><a class="navbar-link" href="/colaborador">Asistencia y materiales</a></td></tr>
-    {% if is_logged_in("admin") %}
-    <tr><td><a class="navbar-link" href="/roles">Cuentas y roles</a></td></tr>
+    {% if get_username() | is_superuser %}
+    <tr><td><a class="navbar-link" href="/cuentas">Cuentas y roles</a></td></tr>
     <tr><td><a class="navbar-link" href="/comisiones">Comisiones</a></td></tr>
     <tr><td><a class="navbar-link" href="/reportes">Reportes</a></td></tr>
     {% endif %}

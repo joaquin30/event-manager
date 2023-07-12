@@ -7,6 +7,7 @@ from app import Controlador, route, obtenerTodo
 pag_inicio = Blueprint('inicio', __name__)
 
 class Inicio(Controlador):
+    decorators = []
     url = '/'
     template = 'inicio/inicio.html'
     
@@ -19,6 +20,7 @@ route(pag_inicio, Inicio)
 
 # La pagina individual de un evento publico
 class PublicacionEvento(Controlador):
+    decorators = []
     url = '/<int:id_evento>'
     template = 'inicio/evento.html'
 

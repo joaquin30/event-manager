@@ -6,13 +6,17 @@ db = Database()
 
 class Cuenta(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
+    st_colaborador_eventos = Set('Evento', reverse='st_colaboradores')
+    st_encargado_eventos = Set('Evento', reverse='st_encargados')
     usuario = Required(str, unique=True, index=True)
     contrasenha = Required(str)
-    tipo = Required(str)
+    superusuario = Required(bool)
 
 class Evento(db.Entity):
     pk_id = PrimaryKey(int, auto=True)
     fk_caja = Optional('Caja', cascade_delete=True)
+    st_colaboradores = Set('Cuenta')
+    st_encargados = Set('Cuenta')
     st_paquetes = Set('Paquete')
     st_actividades = Set('Actividad')
     nombre = Required(str)

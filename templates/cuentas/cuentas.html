@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Cuentas {% endblock %}
+{% block content %}
+<h1>Administrar Cuentas</h1>
+<p><a class="button primary" href="/cuentas/crear">Crear cuenta</a></p>
+<table class="striped">
+<thead>
+  <th>Usuario</th>
+  <th>Contraseña</th>
+  <th></th>
+  <th></th>
+</thead>
+<tbody>
+{% for cuenta in cuentas %}
+<tr>
+  <td>{{ cuenta.usuario }}</td>
+  <td>{{ cuenta.contrasenha }}</td>
+  <td><form action="" method="post">
+    {% if cuenta.superusuario %}
+    <button class="button error" name="superusuario" value="{{ cuenta.pk_id }}">
+      Quitar superusuario
+    </button>
+    {% else %}
+    <button class="button primary" name="superusuario" value="{{ cuenta.pk_id }}">
+      Hacer superusuario
+    </button>
+    {% endif %}
+  </form></td>
+  <td><form action="" method="post">
+    <button class="button error" name="eliminar" value="{{ cuenta.pk_id }}">Eliminar</button>
+  </form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+

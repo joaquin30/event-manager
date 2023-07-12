@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %} Materiales de actividad {{ actividad.nombre }} {% endblock %}
+{% block content %}
+<h1>Materiales de actividad {{ actividad.nombre }} </h1>
+<p><a class="button primary" href="/actividades/{{ evento.pk_id }}/materiales/{{ actividad.pk_id }}/crear">Añadir material</a></p>
+<table class="striped">
+<thead>
+    <tr>
+        <th>Nombre de material</th>
+        <th>Cantidad de unidades</th>
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+{% for material in materiales %}
+<tr>
+    <td>{{ material.nombre }}</td>
+    <td>{{ material.cantidad }}</td>
+    <td><form action="" method="post">
+        <button class="button error" name="eliminar" value="{{ material.pk_id }}">Eliminar</button>
+    </form></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

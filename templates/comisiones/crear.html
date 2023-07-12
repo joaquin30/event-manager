@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Crear actividad {% endblock %}
+{% block content %}
+<script>
+$( function() {
+    var availableTags = [
+        {% for ambiente in ambientes %}
+            "{{ ambiente.nombre }}",
+        {% endfor %}
+    ];
+    $( "#ambiente" ).autocomplete({
+      source: availableTags
+    });
+} );
+</script>
+<h1>Crear actividad</h1>
+<p><a href="/actividades/{{ evento.get_pk() }}"><button>Deshacer cambios</button></a></p>
+{{ render_form(form) }}
+{% endblock %}

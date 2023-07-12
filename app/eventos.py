@@ -37,13 +37,14 @@ class CrearEvento(Controlador):
         if form.validate():
             evento = Evento(nombre=form.nombre.data,
                     descripcion=form.descripcion.data)
-                    
+
             # Creamos una caja automaticamente
             evento.fk_caja = Caja(saldo=0, fk_evento=evento)
-            img = form.img.data
-
+            orm.commit()
+            
             # guardamos la imagen elegida
-            img.save(f'static/img/{evento.get_pk()}.png')
+            img = form.img.data
+            img.save(f'static/img/{evento.pk_id}.png')
             flash(f'Evento "{evento.nombre}" creado. Crea actividades para que se muestre en inicio.')
             return redirect('/eventos')
         else:
@@ -70,7 +71,7 @@ class ModificarEvento(Controlador):
         form.nombre.data = evento.nombre
         form.descripcion.data = evento.descripcion
         return render_template(self.template,
-                url=f'/eventos/modificar/{evento.get_pk()}',
+                url=f'/eventos/modificar/{id_evento}',
                 form=form, evento=evento)
 
     def post(self, id_evento):

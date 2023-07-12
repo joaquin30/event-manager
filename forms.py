@@ -110,3 +110,8 @@ class FormCrearEgreso(FlaskForm):
     descripcion = StringField('Justificación', [DataRequired(), Length(max=100)])
     monto = DecimalField('Monto', [DataRequired(), NumberRange(min=0)])
     submit = SubmitField('Crear egreso')
+
+class FormCrearCuenta(FlaskForm):
+    usuario = StringField('Usuario', [DataRequired()])
+    contrasenha = StringField('Contraseña', [DataRequired()])
+    submit = SubmitField('Crear cuenta')

@@ -5,4 +5,7 @@ docs/
 ./*.plantuml
 ./*.dot
 ./*.png
+static/img/
+static/qr/
 pruebas/
+database.sqlite

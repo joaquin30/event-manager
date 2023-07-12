@@ -89,7 +89,8 @@ class Materiales(Controlador):
             # reducimos una unidad al material elegido
             id_material = request.form.get('material')
             count = Material[id_material].cantidad
-            Material[id_material].cantidad = max(count-1, 0) # para que la cantidad no sea negativa
+            # para que la cantidad no sea negativa
+            Material[id_material].cantidad = max(count-1, 0)
             flash('Material reducido en una unidad')
         except:
             abort(404)

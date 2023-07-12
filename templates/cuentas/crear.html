@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %} Crear cuenta {% endblock %}
+{% block content %}
+<h1>Crear cuenta</h1>
+<p><a class="button" href="/cuentas">Deshacer cambios</a></p>
+{{ render_form(form) }}
+{% endblock %}
