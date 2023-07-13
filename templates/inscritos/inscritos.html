@@ -3,10 +3,10 @@
 {% block content %}
 <script src="/static/scripts/printID.js" defer></script>
 <h1>Inscritos de evento "{{ evento.nombre }}"</h1>
-<h3>Número preinscritos: {{ num_inscritos }}</h3>
+<h4>Número preinscritos: {{ num_inscritos }}</h4>
 {% for paquete in evento.st_paquetes|sort(attribute='nombre') %}
     <h2>Paquete {{ paquete.nombre }}</h2>
-    <h4>Número inscritos: {{ paquete.st_inscritos.count() }}</h4>
+    <p><b>Número inscritos:</b> {{ paquete.st_inscritos.count() }}</p>
     <table class="striped">
     <thead>
         <tr>
