@@ -77,10 +77,10 @@ class CrearEgreso(Controlador):
             egreso = Egreso.get(pk_id=form.codigo.data)
             if egreso:
                 flash('Código de comprobante ya registrado.', 'error')
-                return redirect(f'/egresos/{id_evento}/crear')
+                return redirect(f'/caja/egresos/{id_evento}/crear')
 
             # en caso de que el egreso sea mayor que lo que hay en la caja
-            if evento.fk_caja.saldo - form.monto.data < Decimal(0):
+            if evento.fk_caja.saldo < decimalToInt(form.monto.data):
                 flash('Monto supera al saldo actual.', 'error')
                 return redirect(f'/caja/egresos/{id_evento}/crear')
 
